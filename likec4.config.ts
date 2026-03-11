@@ -6,6 +6,7 @@ export default defineConfig({
   exclude: [
     'node_modules/**'
   ],
+  implicitViews: true,
   generators: {
     /**
      * Generates CSV file with relationships to the 

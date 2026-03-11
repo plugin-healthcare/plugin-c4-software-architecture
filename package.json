@@ -18,9 +18,9 @@
   },
   "devDependencies": {
     "@types/node": "^22.18.6",
-    "likec4": "latest",
-    "vitest": "latest",
-    "typescript": "^5.9.3"
+    "likec4": "^1.52.0",
+    "typescript": "^5.9.3",
+    "vitest": "latest"
   },
   "stackblitz": {
     "installDependencies": true
