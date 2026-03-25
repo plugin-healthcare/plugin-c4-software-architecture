@@ -1,0 +1,13 @@
+# Runtime View {#section-runtime-view}
+
+## \<Runtime Scenario 1\> {#_runtime_scenario_1}
+
+- *\<voeg een runtime diagram of een tekstuele beschrijving van het scenario toe\>*
+
+- *\<voeg een beschrijving toe van bijzondere aspecten van de interactie tussen de instanties van de bouwstenen die in dit diagram worden weergegeven\>*
+
+## \<Runtime Scenario 2\> {#_runtime_scenario_2}
+
+## ...
+
+## \<Runtime Scenario n\> {#_runtime_scenario_n}

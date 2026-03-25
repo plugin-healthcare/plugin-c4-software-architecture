@@ -1,0 +1,3 @@
+# Oplossing Strategie {#section-solution-strategy}
+
+*\<Korte samenvatting en uitleg van de fundamentele beslissingen en oplossingsstrategieën die de architectuur vormgeven. Kan technologie, top-level decompositie, benaderingen om de belangrijkste kwaliteitsdoelen te bereiken en relevante organisatorische beslissingen omvatten.\>*

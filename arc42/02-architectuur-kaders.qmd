@@ -1,0 +1,3 @@
+# Architectuur kaders
+
+*\<Alles wat teams beperkt in hun ontwerp- en implementatiebeslissingen of beslissingen over gerelateerde processen. Kan soms verder gaan dan individuele systemen en geldt voor hele organisaties en bedrijven.\>*

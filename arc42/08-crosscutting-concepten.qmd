@@ -1,0 +1,15 @@
+# Cross-cutting Concepten {#section-concepts}
+
+## *\<Concept 1\>* {#_concept_1}
+
+*\<uitleg\>*
+
+## *\<Concept 2\>* {#_concept_2}
+
+*\<uitleg\>*
+
+...
+
+## *\<Concept n\>* {#_concept_n}
+
+*\<uitleg\>*

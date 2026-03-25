@@ -1,0 +1,39 @@
+project:
+  type: book
+
+book:
+  title: "PLUGIN architectuur"
+  author: "Daniel Kapitan"
+  date: "25/03/2026"
+  chapters:
+    - index.qmd
+    - 01-inleiding-doelen.qmd
+    - 02-architectuur-kaders.qmd
+    - 03-context-systeem-scope.qmd
+    - 04-oplossing-strategie.qmd
+    - 05-bouwstenen-view.qmd
+    - 06-runtime-view.qmd
+    - 07-deployment-view.qmd
+    - 08-crosscutting-concepten.qmd
+    - 09-architectuur-beslissingen.qmd
+    - 10-kwaliteit-eisen.qmd
+    - 11-risicos-technische-schuld.qmd
+    - 12-woordenlijst.qmd
+    - references.qmd
+
+bibliography: plugin.bib
+
+brand: _brand.yml
+
+format:
+  typst:
+    font-paths: fonts
+    mainfont: Figtree
+    template-partials:
+      - typst-show.typ
+  html:
+    theme:
+      - cosmo
+      - brand
+  # pdf:
+  #   documentclass: scrreprt

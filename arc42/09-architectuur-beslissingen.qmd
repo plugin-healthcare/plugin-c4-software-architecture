@@ -1,0 +1,3 @@
+# Architectuur Beslissingen {#section-design-decisions}
+
+*\<Belangrijke, kostbare, kritische, grootschalige of risicovolle architectuurbeslissingen inclusief rationale. Gebruik ADR (Architecture Decision Records) formaat waar van toepassing.\>*

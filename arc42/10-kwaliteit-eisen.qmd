@@ -1,0 +1,9 @@
+# Kwaliteit Eisen {#section-quality-scenarios}
+
+## Kwaliteits Boom {#_kwaliteits_boom}
+
+*\<De kwaliteitsboom (zoals gedefinieerd in ATAM – Architecture Tradeoff Analysis Method) met kwaliteits-/evaluatiescenario's als bladeren.\>*
+
+## Kwaliteits Scenarios {#_kwaliteits_scenarios}
+
+*\<Concretisering van (soms vage of impliciete) kwaliteitseisen door middel van kwaliteitsscenario's. Gebruik scenario's om te beschrijven wat er moet gebeuren wanneer een bepaalde kwaliteitseis in de praktijk wordt gebracht.\>*
