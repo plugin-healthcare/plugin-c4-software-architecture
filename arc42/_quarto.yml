@@ -40,7 +40,7 @@ format:
       - brand
     include-in-header:
       - text: |
-          <script module src="https://plugin-healthcare.github.io/plugin-c4-software-architecture/c4/likec4-views.js"></script>
+          <script module src="https://plugin-healthcare.github.io/plugin-architecture/c4/likec4-views.js"></script>
 
   # pdf:
   #   documentclass: scrreprt
