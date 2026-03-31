@@ -2,14 +2,75 @@
 
 ## Business Context {#_business_context}
 
-**\<Diagram of Tabel\>**
+PLUGIN is in essentie een data space. De business context wordt voor een groot deel bepaald door de huidige blauwdrukken die voor de EHDS zijn ontworpen. Onderstaande figuren geven een schematische waargave van de belangrijkste concepten van een data space in het algemeen en hoe dat er specifiek voor de EHDS eruit ziet.
 
-**\<optioneel: Uitleg van de externe domein interfaces\>**
+![](./images/datastation-4corner.drawio.svg)
+
+![](./images/datastation-netwerk.drawio.svg)
+
 
 ## Technische Context {#_technische_context}
 
-**\<Diagram of Tabel\>**
+### Datastation: composable data stack
 
-**\<optioneel: Uitleg van technische interfaces\>**
+De composable data stack is technische context waarin het datastation is ontworpen en wordt geimplementeerd:
 
-**\<Mapping Input/Output naar kanalen\>**
+1. **Modulariteit:** Componenten (bouwstenen) kunnen onafhankelijk van elkaar worden vervangen of geschaald.
+2. **Interoperabiliteit:** Dankzij open standaarden (zoals Apache Arrow en Parquet) kunnen verschillende systemen zonder kostbare conversies samenwerken.
+3. **Ontkoppeling:** De fysieke opslag (_storage_), de data verwerking (_compute_) en de schema-informatie (_catalog_) zijn strikt van elkaar gescheiden.
+
+
+::: {.panel-tabset}
+
+## Storage (opslag)
+
+In traditionele systemen is data vaak opgeslagen in een eigen, gesloten formaat dat alleen door de bijbehorende database-engine gelezen kan worden. In de Composable Data Stack wordt de opslaglaag geagnostiseerd.
+
+* **Open bestandsformaten:** Data wordt opgeslagen in gestandaardiseerde kolomgeoriënteerde formaten zoals **Apache Parquet**. Dit maakt de data toegankelijk voor een breed scala aan tools zonder dat de data verplaatst of getransformeerd hoeft te worden.
+* **Lakehouses:** Door gebruik te maken van object storage (zoals S3 of Azure Blob) als centrale bron, fungeert de opslaglaag als een 'single source of truth' die onafhankelijk van de rekenkracht kan groeien.
+
+## Compute (verwerking en analyse)
+
+Door de ontkoppeling van opslag wordt de 'compute-laag' vervangbaar. Dit stelt organisaties in staat om verschillende gespecialiseerde engines te gebruiken op dezelfde dataset.
+
+* **Engine-Agnostische Verwerking:** Een organisatie kan SQL-queries uitvoeren met de ene engine (bijv. DuckDB of Trino), terwijl een data scientist tegelijkertijd machine learning-modellen traint met een andere tool (bijv. PyTorch), direct op dezelfde data.
+* **Efficiënte data-uitwisseling:** Om de snelheid tussen verschillende compute-engines te waarborgen, fungeert **Apache Arrow** als de *lingua franca* voor data in het geheugen. Dit minimaliseert de overhead van serialisatie en deserialisatie (het omzetten van dataformaten).
+
+## Catalog (schema informatie)
+
+De verbindende factor in een gedecentraliseerde stack is de metadatalaag. Zonder centrale metadata ontstaat er versnippering.
+
+* **Tabelformaten:** Technologieën zoals **Apache Iceberg** of Delta Lake voegen een abstractielaag toe bovenop de ruwe bestanden. Ze beheren metadata over welke bestanden bij welke tabel horen, ondersteunen transacties (ACID) en maken tijdreizen (time-travel) door data mogelijk.
+* **Catalogus:** De catalogus fungeert als de inventaris van de gehele stack. Het houdt bij waar de data staat, wie de eigenaar is en wat de structuur (schema) is. Dit is essentieel voor de vindbaarheid en governance, vergelijkbaar met de FAIR-principes (Findable, Accessible, Interoperable, Reusable).
+
+:::{.callout-warning}
+
+### Catalog vs. metadata
+
+De catalogus in de composable data stack refereert naar het information schema van de data. Hiervoor zullen open standaarden zoals Apache Iceberg en DuckLake worden gebruikt. Deze catalogus is anders dan de metadata catalogus die op DCAT is gebaseerd en als generieke functie is beschreven binnen het landelijk dekkend netwerk.
+:::
+:::
+
+### Processing hub: soorten netwerken
+
+Om het concept van _data visiting_ toe te passen is een netwerk van datastations nodig die met elkaar verbonden zijn. De manier waarop deze datastations zijn verbonden (de zogenaamde netwerk topologie) is bepalend voor de architectuur van PLUGIN. We kennen grofweg drie netwerk topologieën: centraal, decentraal en gedistribueerd.[^1] 
+
+![Soorten netwerken: a) centraal, b) decentraal, c) distribueerd.](./images/type-of-networks.png)
+
+Voor het uitvoeren van gefedereerde berekeningen zijn er grofweg twee mogelijkheden:[^2]
+
+1. Datastations zijn verbonden met één centrale server, met andere woorden een federatie BVO met een centraal netwerk (ook wel bekend als een _hub-and-spoke_ netwerk).
+2. Datastations zijn met elkaar verbonden door middel van een een distribueerd netwerk (ook wel _peer-to-peer_ genoemd).
+
+![Gefedereerde gegevensverwerking met een a) centrale processing hub, en b) _peer-to-peer_ netwerk.](./images/fl-types.png)
+
+De meest gebruikte vorm van gefedereerde gegevensverwerking gaat uit van een centrale server die de datastations aanstuurt. Het concept van een _Federated Database System (FDBS)_ is in 1985 beschreven en wordt al jaren gebruikt voor het uitvoeren van gefedereerde analyse (_queries_) over meerdere databases.[^3] Het concept van gefedereerd leren zoals in 2017 door Google is geintroduceerd[^4] maakt ook gebruik van een centrale server.
+
+In de beschrijving van datastations gaan we dus uit van een processing hub, waarop de datagebruiker inlogt om toegang om berekeningen te kunnen initieren in het netwerk van datastations. Federated computing met een _peer-to-peer_ netwerk zijn expliciet niet in scope van de architectuur zoals hier beschreven is.
+
+Daarnaast moet het in de context van de EHDS mogelijk zijn om te werken met _federations of federations_. De hybride architectuur van PLUGIN die we voor ogen hebben kent een gelaagdheid van knooppunten. Denk bijvoorbeeld aan een zorginstelling die participeert in een regionaal samenwerkingsverband, waarbij vervolgens verschillende regionale knooppunten opgaan in een landelijk netwerk. Daarbovenop kunnen landelijke knooppunten onderdeel uitmaken van een Europese federatie. In de uitwerking van de architectuur gaan we daarom uit van een _decentraal netwerk_ dat een gelaagdheid kent van meerdere netwerken van BVOs (netwerk type b in bovenstaande illustratie).
+
+[^1]: @baran1964distributed
+[^2]: @rieke2020future
+[^3]: @heimbigner1985federated
+[^4]: @mcmahan2017communication

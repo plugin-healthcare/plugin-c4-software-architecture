@@ -2,6 +2,14 @@
 
 ## Gehele whitebox Systeem {#_gehele_whitebox_systeem}
 
+```{=html}
+<likec4-view
+   view-id="__plugin"
+   browser="true"
+   dynamic-variant="sequence">
+</likec4-view>
+```
+
 ***\<Overzichts Diagram\>***
 
 Motivatie
@@ -16,7 +24,15 @@ Belangrijke Interfaces
 
 :   *\<Beschrijving van belangrijke interfaces\>*
 
-### \<Naam black box 1\> {#_naam_black_box_1}
+### Datastation {#_datastation}
+
+```{=html}
+<likec4-view
+   view-id="datastation"
+   browser="true"
+   dynamic-variant="sequence">
+</likec4-view>
+```
 
 *\<Doel/Verantwoordelijkheid\>*
 
@@ -30,7 +46,15 @@ Belangrijke Interfaces
 
 *\<(Optioneel) Open issues/problemen/risico's\>*
 
-### \<Naam black box 2\> {#_naam_black_box_2}
+### Processing hub {#_processing_hub}
+
+```{=html}
+<likec4-view
+   view-id="fph"
+   browser="true"
+   dynamic-variant="sequence">
+</likec4-view>
+```
 
 *\<black box template\>*
 

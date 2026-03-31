@@ -61,12 +61,15 @@ In **laag 4** is de de processing hub gepositioneerd, weermee elk datastation op
 
 In **laag 5** wordt aan de datagebruiker maximale vrijheid gegeven om allerlei diensten af te nemen en/of analyses te doen.
 
-:::{.callout-note}
+:::{.callout-note collapse="true"}
 
 ## Datastations voor primair vs. secundair gebruik
 
 De PLUGIN architectuur is bedoeld als een oplossing voor een landelijk dekkende infrastructuur voor secundair gebruik. Een PLUGIN datastation is op een aantal punten wezenlijk anders dan een datastation voor primair gebruik. Datastations in de context van primair gebruik zijn conceptueel hetzelfde als de [Shared Health Record](https://guides.ohie.org/arch-spec/openhie-component-specifications-1/openhie-shared-health-record-shr) component zoals gespecificeerd in de [OpenHIE architectuur](https://guides.ohie.org/arch-spec). RSO Zuid-Limburg werkt aan een primair datastation op basis van openEHR, een oplossingsrichting die ook in Scandinavië [@pohjonen2022norway] en Slovenië [@bajric2023building] wordt gebruikt. Hoewel datastations voor primair gebruik veel overeenkomsten vertonen met datastations voor secundair gebruik, zijn er ook belangrijke verschillen in de technische kenmerken tussen deze systemen. Deze verschillen zitten bijvoorbeeld in snelheid (_latency_) en volume waarmee data in het station kan worden benaderd: voor primair gebruik moeten snel enkelvoudige records kunnen worden opgehaald, terwijl voor secundair gebruik grotere datasets bevraagd kunnen worden en hogere wachttijden acceptabel zijn. 
 :::
+
+## Een composable data stack voor datastations
+
 
 
 [^3]: Zie [EOSC-ENTRUST Blueprint & Interoperability Framework](https://zenodo.org/records/18299343) en [DARE UK Federated Architecture Blueprint](https://zenodo.org/records/14192786) voor meer details.
