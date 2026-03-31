@@ -1,9 +1,12 @@
 project:
   type: book
+  output-dir: ../_site
 
 book:
   title: "PLUGIN architectuur"
-  author: "Daniel Kapitan"
+  author:
+    - Daniel Kapitan
+    - Madou Derksen
   date: "25/03/2026"
   chapters:
     - index.qmd

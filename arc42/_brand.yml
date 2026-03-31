@@ -6,8 +6,8 @@
 #   foreground: dark-grey
 #   primary: black
 
-# logo: 
-#   medium: logo.png
+logo: 
+  medium: images/logo-wide.png
 
 typography:
   fonts:

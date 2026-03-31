@@ -2,14 +2,16 @@
 
 ## Inleiding
 
-De Nederlandse zorg beschikt over grote hoeveelheden waardevolle gezondheidsdata. Deze data worden vooral verzameld voor primair gebruik: het verlenen van zorg. Secundaire toepassingen, zoals (wetenschappelijk) onderzoek, kwaliteitsverbetering en innovatie, stellen fundamenteel andere eisen aan datakwaliteit, datastandaardisatie en dataharmonisatie. Hierdoor is het voor ziekenhuizen – en met name regionale instellingen – complex en arbeidsintensief om gegevens beschikbaar te maken voor secundair gebruik. Door de komst van de European Health Data Space (EHDS) moet hier  dringend een oplossing voor komen: deze Europese wetgeving vereist vanaf maart 2027 dat EU lidstaten (en alle datahouders daarbinnen) hun gezondheidsdata op een veilige, betrouwbare en gestandaardiseerde manier kunnen ontsluiten voor zowel primair als secundair gebruik.
+De Nederlandse zorg beschikt over grote hoeveelheden waardevolle gezondheidsdata. Deze data worden vooral verzameld voor primair gebruik: het verlenen van zorg. Secundaire toepassingen, zoals (wetenschappelijk) onderzoek, kwaliteitsverbetering en innovatie, stellen fundamenteel andere eisen aan datakwaliteit, datastandaardisatie en dataharmonisatie. Hierdoor is het voor ziekenhuizen – en met name regionale instellingen – complex en arbeidsintensief om gegevens beschikbaar te maken voor secundair gebruik. Door de komst van de European Health Data Space (EHDS) moet hier dringend een oplossing voor komen: deze Europese wetgeving vereist vanaf maart 2027 dat EU lidstaten (en alle datahouders daarbinnen) hun gezondheidsdata op een veilige, betrouwbare en gestandaardiseerde manier kunnen ontsluiten voor zowel primair als secundair gebruik.
 
 Het **Pl**atform voor **U**itwisseling en Her**g**ebruik van Kl**i**nische Data **N**ederland (PLUGIN) beoogt klinische data die routinematig in ziekenhuizen wordt vastgelegd te ontsluiten op een veilige, schaalbare en duurzame wijze. In eerste instantie richt PLUGIN zich op data zoals die in het Elektronisch Patiëntendossier (EPD) worden vastgelegd, maar op termijn kunnen ook andere databronnen worden ontsloten, zoals beeldmateriaal in PACS-systemen en laboratoriumgegevens uit LIMS-systemen.
 
-De architectuur van PLUGIN neemt onverkort de uitgangspunten voor landelijk dekkend netwerk voor databeschikbaarheid over, te weten[^1]:
+De architectuur van PLUGIN neemt onverkort de uitgangspunten voor landelijk dekkend netwerk voor databeschikbaarheid over, te weten[^01-inleiding-doelen-1]:
+
+[^01-inleiding-doelen-1]: Zie <https://www.datavoorgezondheid.nl/onderwerpen/l/landelijk-dekkend-netwerk>
 
 - **Privacy en security by design:** privacy en gegevensbeveiliging worden al bij de ontwikkeling van functionaliteit voor het landelijk dekkend netwerk meegenomen in het ontwerp.
-- **Een hoge mate van opensourcewerken:**** door in openbaarheid vrij toegankelijke software en code te ontwikkelen, wordt het risico op leveranciersafhankelijkheid zoveel mogelijk voorkomen.
+- **Een hoge mate van opensourcewerken:**\*\* door in openbaarheid vrij toegankelijke software en code te ontwikkelen, wordt het risico op leveranciersafhankelijkheid zoveel mogelijk voorkomen.
 - De mogelijkheid tot **schaalbaarheid** zodat functionaliteit later opgeschaald kan worden naar landelijk gebruik.
 - De mogelijkheid van **inbeheername door een publieke organisatie** zodat beschikbaarheid van data geen verdienmodel wordt.
 - De **brede toepasbaarheid** van het landelijk dekkend netwerk over het gehele zorg- en welzijnsdomein en ook voor secundair gebruik.
@@ -19,35 +21,25 @@ Ondanks deze uitgangspunten, kunnen we constateren dat tijdens de ontwikkeling v
 
 > Gezien de gevoeligheid van gezondheidsgegevens moeten waar mogelijk beginselen als “privacy door ontwerp” en “privacy door standaardinstellingen” en het concept “breng de vragen naar de gegevens in plaats van die gegevens te verplaatsen” in acht worden genomen.
 
-Het concept van *data visiting*, ook wel bekend als *federated computing*, *algorithm-to-the-data* of *Personal Health Train (PHT)*, wordt nergens in de EHDS nader toegelicht2. De TEHDAS2 consultatie[^2] gaat hier tot op zekere hoogte wel op in en maakt een aanzet voor de definitie van federated computing.
+Het concept van *data visiting*, ook wel bekend als *federated computing*, *algorithm-to-the-data* of *Personal Health Train (PHT)*, wordt nergens in de EHDS nader toegelicht2. De TEHDAS2 consultatie[^01-inleiding-doelen-2] gaat hier tot op zekere hoogte wel op in en maakt een aanzet voor de definitie van federated computing.
 
-::: {.callout-note}
+[^01-inleiding-doelen-2]: [TEHDAS2](https://tehdas2.eu) is een Europees programma dat zich richt op het opstellen van richtlijnen en technische specificaties secundair gebruik van gezondheidsgegevens in Europa. Het programma loopt van 1 mei 2024 tot 31 december 2026. De informatie die beschikbaar was per 1 januari 2026 is meegenomen in de architectuur van PLUGIN.
 
+::: callout-note
 ### Definities federated computing in TEHDAS2
 
 - **Gefedereerde berekening:** gedecentraliseerde berekening van data waarbij de berekeningen op lokale, gedistribueerde 'stations' worden uitgevoerd in plaats van centrale verwerking in één centraal systeem
 - **Gefedereerde analyse:** een specifieke vorm van gefedereerde verwerking waarbij statistieken lokaal worden berekend op verschillende 'stations'. Deze methode is geschikt voor o.a. vergelijkende analyses, multi-centra onderzoek en andere vormen van collaboratieve statistische analyse. Alleen geaggregeerde resultaten of samenvattende statistieken worden uit de lokale stations geexporteerd, met bijhorende waarborgen dat geen gegevens uit de stations worden onttrokken die later zouden kunnen worden herleid tot individuele personen; heridentificatie moet worden voorkomen.
 - **Gefedereerd leren:** een specifieke vorm van gefedereerde berekening waarbij modellen worden getraind en gevalideerd op gedistribueerde BVOs. De ruwe data wordt niet gedeeld tussen de BVOs. In plaats daarvan worden alleen de model updates gedeeld om daarmee betere data privacy en beveiliging te bereiken. Omdat het moeilijk is om de anonimiteit van tussentijdse resultaten te beoordelen, is het essentieel dat gefedereerd leren gebeurd in een vertrouwd netwerk van BVOs.
-
 :::
 
 ## Requirementsoverzicht
 
-
-
 ## Kwaliteitsdoelen
-
-
 
 ## Belanghebbenden
 
-+-------------+---------------------------+---------------------------+
-| Rol/Naam    | Contact persoon           | Verwachtingen             |
-+=============+===========================+===========================+
-| *\<Rol-1\>* | *\<Contact-1\>*           | *\<Verwachting-1\>*       |
-+-------------+---------------------------+---------------------------+
-| *\<Rol-2\>* | *\<Contact-2\>*           | *\<Verwachting-2\>*       |
-+-------------+---------------------------+---------------------------+
-
-[^1]: Zie [https://www.datavoorgezondheid.nl/onderwerpen/l/landelijk-dekkend-netwerk](https://www.datavoorgezondheid.nl/onderwerpen/l/landelijk-dekkend-netwerk)
-[^2]: [TEHDAS2](https://tehdas2.eu) is een Europees programma dat zich richt op het opstellen van richtlijnen en technische specificaties secundair gebruik van gezondheidsgegevens in Europa. Het programma loopt van 1 mei 2024 tot 31 december 2026. De informatie die beschikbaar was per 1 januari 2026 is meegenomen in de architectuur van PLUGIN.
+| Rol/Naam    | Contact persoon | Verwachtingen       |
+|-------------|-----------------|---------------------|
+| *Datahouders* | *\<Contact-1\>* | *\<Verwachting-1\>* |
+| *Datagebruikers* | *\<Contact-2\>* | *\<Verwachting-2\>* |
