@@ -1,0 +1,75 @@
+# Bouwstenen View {#section-building-block-view}
+
+## Gehele whitebox Systeem {#_gehele_whitebox_systeem}
+
+***\<Overzichts Diagram\>***
+
+Motivatie
+
+:   *\<tekstuele uitleg\>*
+
+Ingesloten bouwstenen
+
+:   *\<Beschrijving van ingesloten bouwstenen ('black boxes')\>*
+
+Belangrijke Interfaces
+
+:   *\<Beschrijving van belangrijke interfaces\>*
+
+### \<Naam black box 1\> {#_naam_black_box_1}
+
+*\<Doel/Verantwoordelijkheid\>*
+
+*\<Interface(s)\>*
+
+*\<(Optioneel) Kwaliteits-/Prestatie karakteristieken\>*
+
+*\<(Optioneel) directories/bestand locaties\>*
+
+*\<(Optioneel) Vervulde requirements\>*
+
+*\<(Optioneel) Open issues/problemen/risico's\>*
+
+### \<Naam black box 2\> {#_naam_black_box_2}
+
+*\<black box template\>*
+
+### \<Naam black box n\> {#_naam_black_box_n}
+
+*\<black box template\>*
+
+### \<Naam interface 1\> {#_naam_interface_1}
+
+...
+
+### \<Naam interface m\> {#_naam_interface_m}
+
+## Niveau 2 {#_niveau_2}
+
+### White Box *\<bouwsteen 1\>* {#_white_box_bouwsteen_1}
+
+*\<white box template\>*
+
+### White Box *\<bouwsteen 2\>* {#_white_box_bouwsteen_2}
+
+*\<white box template\>*
+
+...
+
+### White Box *\<bouwsteen m\>* {#_white_box_bouwsteen_m}
+
+*\<white box template\>*
+
+## Niveau 3 {#_niveau_3}
+
+### White Box *\<bouwsteen x.1\>* {#_white_box_bouwsteen_x_1}
+
+*\<white box template\>*
+
+### White Box *\<bouwsteen x.2\>* {#_white_box_bouwsteen_x_2}
+
+*\<white box template\>*
+
+### White Box *\<bouwsteen y.1\>* {#_white_box_bouwsteen_y_1}
+
+*\<white box template\>*

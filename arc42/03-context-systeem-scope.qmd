@@ -1,0 +1,15 @@
+# Context en Systeem Scope {#section-context-and-scope}
+
+## Business Context {#_business_context}
+
+**\<Diagram of Tabel\>**
+
+**\<optioneel: Uitleg van de externe domein interfaces\>**
+
+## Technische Context {#_technische_context}
+
+**\<Diagram of Tabel\>**
+
+**\<optioneel: Uitleg van technische interfaces\>**
+
+**\<Mapping Input/Output naar kanalen\>**

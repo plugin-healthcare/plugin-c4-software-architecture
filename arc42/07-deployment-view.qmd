@@ -1,0 +1,33 @@
+# Deployment View {#section-deployment-view}
+
+## Infrastructuur Niveau 1 {#_infrastructuur_niveau_1}
+
+***\<Overzichts Diagram\>***
+
+Motivatie
+
+:   *\<uitleg in tekstuele vorm\>*
+
+Kwaliteit en/of Performance Eigenschappen
+
+:   *\<uitleg in tekstuele vorm\>*
+
+Mapping van Bouwstenen naar Infrastructuur
+
+:   *\<beschrijving van de mapping\>*
+
+## Infrastructuur Niveau 2 {#_infrastructuur_niveau_2}
+
+### *\<Infrastructuur Element 1\>* {#_infrastructuur_element_1}
+
+*\<diagram + uitleg\>*
+
+### *\<Infrastructuur Element 2\>* {#_infrastructuur_element_2}
+
+*\<diagram + uitleg\>*
+
+...
+
+### *\<Infrastructuur Element n\>* {#_infrastructuur_element_n}
+
+*\<diagram + uitleg\>*
