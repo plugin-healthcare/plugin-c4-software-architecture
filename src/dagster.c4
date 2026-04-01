@@ -1,0 +1,65 @@
+model {
+    extend dagster {
+        asset = component 'Asset' {
+            description 'An asset represents a logical unit of data such as a table, dataset, or machine learning model. Assets can have dependencies on other assets, forming the data lineage for your pipelines. As the core abstraction in Dagster, assets can interact with many other Dagster entities to facilitate certain tasks. When you define an asset, either with the @dg.asset decorator or via a component, the definition is automatically added to a top-level Definitions object.'
+        }
+        asset-check = component 'Asset Check' {
+            description 'An asset_check is associated with an asset to ensure it meets certain expectations around data quality, freshness or completeness. Asset checks run when the asset is executed and store metadata about the related run and if all the conditions of the check were met.'
+        }
+        asset-spec = component 'Asset Spec' {
+            description 'Specs are standalone objects that describe the identity and metadata of Dagster entities without defining their behavior. For example, an AssetSpec contains essential information like the asset\'s key (its unique identifier) and tags (labels for organizing and annotating the asset), but it doesn\'t include the logic for materializing that asset.'
+        }
+        code-location = component 'Code location' {
+            description 'A code location is a collection of Dagster entity definitions deployed in a specific environment. A code location determines the Python environment (including the version of Dagster being used as well as any other Python dependencies). A Dagster project can have multiple code locations, helping isolate dependencies.'
+        }
+        component = component 'Component' {
+            description 'Components are objects that programmatically build assets and other Dagster entity definitions, such as asset_checks, schedules, resources, and sensors. They accept schematized configuration parameters (which are specified using YAML or lightweight Python) and use them to build the actual definitions you need. Components are designed to help you quickly bootstrap parts of your Dagster project and serve as templates for repeatable patterns.'
+        }
+        config = component 'Config' {
+            description 'A config is used to specify config schema for assets, jobs, schedules, and sensors. A RunConfig is a container for all the configuration that can be passed to a run. This allows for parameterization and the reuse of pipelines to serve multiple purposes.'
+        }
+        definition = component 'Definition' {
+            description 'The objects that combine metadata about Dagster entities with Python functions that define how they behave, for example, asset, ScheduleDefinition , and resource definitions. Note that there is also a top-level Definitions object, that contains all the definitions in a Dagster project'
+        }
+        io-manager = component 'IO Manager' {
+            description 'An IOManager defines how data is stored and retrieved between the execution of assets and ops. This allows for a customizable storage and format at any interaction in a pipeline.'
+        }
+        job = component 'Job' {
+            description 'A job is a subset of assets or the GraphDefinition of ops. Jobs are the main form of execution in Dagster.'
+        }
+        partition = component 'Partition' {
+            description 'A PartitionsDefinition represents a logical slice of a dataset or computation mapped to a certain segments (such as increments of time). Partitions enable incremental processing, making workflows more efficient by only running on relevant subsets of data.'
+        }
+        resource = component 'Resource' {
+            description 'A ResourceDefinition is a way to make external resources (like database or API connections) available to Dagster entities (like assets, schedules, or sensors) during job execution, and to clean up after execution resolves. A ConfigurableResource is a resource that uses structured configuration. For more information, see Configuring resources.'
+        }
+        schedule = component 'Schedule' {
+            description 'A ScheduleDefinition is a way to automate jobs or assets to occur on a specified interval. In the cases that a job or asset is parameterized, the schedule can also be set with a run configuration (RunConfig) to match.'
+        }
+        sensor = component 'Sensor' {
+            description 'A sensor is a way to trigger jobs or assets when an event occurs, such as a file being uploaded or a push notification. In the cases that a job or asset is parameterized, the sensor can also be set with a run configuration (RunConfig) to match.'
+        }
+
+        asset -> asset-check 'may use'
+        asset -> io-manager 'may use'
+        asset -> partition 'may use'
+        asset -> resource 'may use'
+        asset-spec -> asset 'describes'
+        component -> asset 'builds'
+        component -> definition 'builds'
+        definition -> asset 'contains one or more'
+        definition -> asset-check 'contains one or more'
+        definition -> code-location 'must be deployed in'
+        definition -> io-manager 'contains one or more'
+        definition -> job 'contains one or more'
+        definition -> resource 'contains one or more'
+        job -> asset 'may contain a selection of'
+        schedule -> asset 'may include'
+        schedule -> job 'may include'
+        schedule -> resource 'may use'
+        sensor -> asset 'may include'
+        sensor -> job 'may include'
+        sensor -> resource 'may use'
+        
+
+}

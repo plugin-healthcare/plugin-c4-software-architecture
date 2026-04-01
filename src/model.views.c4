@@ -14,4 +14,9 @@ views {
     include *
     include -> *
   }
+
+  view dagster {
+    title 'Dagster'
+    include dagster.*
+  }
 }

@@ -16,7 +16,13 @@ specification {
             textSize large
         }
     }
-    element component
+    element component {
+        style {
+            shape rectangle
+            color slate
+            textSize medium
+        }
+    }
     element datastore {
         style {
             shape storage
