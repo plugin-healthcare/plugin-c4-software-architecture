@@ -153,5 +153,5 @@ model {
         plugin.fph.vantage6-server -> plugin.datastation.vantage6-node 'stuurt taken naar'
         plugin.datastation.vantage6-node -> plugin.fph.vantage6-server 'stuurt resultaten terug naar'
     }
-
+    dagster = system 'Dagster'
 }

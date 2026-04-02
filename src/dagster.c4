@@ -59,7 +59,6 @@ model {
         schedule -> resource 'may use'
         sensor -> asset 'may include'
         sensor -> job 'may include'
-        sensor -> resource 'may use'
-        
-
+        sensor -> resource 'may use'   
+    }
 }
