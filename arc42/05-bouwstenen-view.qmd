@@ -1,6 +1,20 @@
-# Bouwstenen View {#section-building-block-view}
+# Bouwstenen View {#sec-building-block-view}
 
-## Gehele whitebox Systeem {#_gehele_whitebox_systeem}
+::: {.callout-caution collapse="true"}
+
+## Gebruikte modelleringsconventies
+
+In @sec-building-block-view, @sec-runtime-view en @sec-deployment-view gebruiken we het [C4 model](https://c4model.com/) om de sofware architectuur te visualiseren . C4 kent vier abstractieniveaus zoals hieronder is weergegeven. In dit document beschrijven we de architectuur tot en met component niveau.
+
+![Een **software systeem** bestaat uit één of meerdere **container**, die elk uit **componenten** bestaan welke zijn geimplementeerd met één of meerdere **code** elementen.](images/c4-abstractions.png)
+
+**Let op:** wat in C4 een container heet, is vergelijkbaar met het concept van een Applicatie component in Archimate. Beiden zijn abstracties die als op zichzelf staande applicaties te implementeren zijn. Een C4 container is gevisualiseerd onderstaand icoon. Wat in C4 een component heet is **niet** afzonderlijk deploybaar.
+
+![Het icoon van een Archimate applicatie component is gebruikt om een C4 container te visualiseren.](images/container-shape.png)
+
+:::
+
+## Gehele whitebox systeem
 
 ```{=html}
 <likec4-view
@@ -10,21 +24,19 @@
 </likec4-view>
 ```
 
-***\<Overzichts Diagram\>***
+Op het hoogste abstractieniveau heeft PLUGIN dezelfde architectuur als een data space. De Processing Hub en het Datastation de belangrijkste deelsystemen die zijn ontworpen voor gebruik door de datagebruiker resp. de datahouder. In lijn met de vereisten voor technische interoperabiliteit (TIR, met name TIR-1), gaan we uit van twee soorten interfaces voor elk van deze deelsystemen :
 
-Motivatie
+- Een grafische user interface, veelal web-gebaseerd
+- Een API en/of client libraries
 
-:   *\<tekstuele uitleg\>*
+::: {.callout-caution collapse="true"}
+## Detailniveau van dit architectuur document
 
-Ingesloten bouwstenen
+Dit architectuur document richt zich vooral op het datastation en de processing hub als belangrijke deelsystemen. Het voert te ver om de details van een volledige data space te beschrijven, inclusief generieke componenten voor identificatie, authenticatie, authorisatie en bijvoorbeeld de landelijke catalogus functie. Waar relevant zullen we wel ingegaan op het koppelvlak met deze systemen.
 
-:   *\<Beschrijving van ingesloten bouwstenen ('black boxes')\>*
+:::
 
-Belangrijke Interfaces
-
-:   *\<Beschrijving van belangrijke interfaces\>*
-
-### Datastation {#_datastation}
+## Datastation {#_datastation}
 
 ```{=html}
 <likec4-view
@@ -33,20 +45,28 @@ Belangrijke Interfaces
    dynamic-variant="sequence">
 </likec4-view>
 ```
+- Dagster als centrale orchestrator van alle pipelines
 
-*\<Doel/Verantwoordelijkheid\>*
 
-*\<Interface(s)\>*
+### PLUGIN-Lake
 
-*\<(Optioneel) Kwaliteits-/Prestatie karakteristieken\>*
+```{=html}
+<likec4-view
+   view-id="__plugin_datastation_plugin-lake"
+   browser="true"
+   dynamic-variant="sequence">
+</likec4-view>
+```
+- PLUGIN-Lake is implementatie van lakehouse architectuur, maar dan geoptimaliseerd voor decentraal systeem
+- Principe dat alle interacties naar de storage laag via een interface lopen
+   - Dagster deamon als _gatekeeper_ incl. loging zoals vereist in TIR-12, TIR-13, FSPER-4
+   - PLUGIN-Lake API implementeert REST API zoals vereist in vereisten voor technische interoperabiliteit, met name TIR-1 t/m TIR-5.
 
-*\<(Optioneel) directories/bestand locaties\>*
+### PLUGIN-Rosetta
 
-*\<(Optioneel) Vervulde requirements\>*
+- Concept achter PLUGIN-Rosetta uitleggen
 
-*\<(Optioneel) Open issues/problemen/risico's\>*
-
-### Processing hub {#_processing_hub}
+## Processing hub {#_processing_hub}
 
 ```{=html}
 <likec4-view
@@ -55,45 +75,14 @@ Belangrijke Interfaces
    dynamic-variant="sequence">
 </likec4-view>
 ```
+### PLUGIN-ML
 
-*\<black box template\>*
+```{=html}
+```
 
-### \<Naam black box n\> {#_naam_black_box_n}
+### PLUGIN-Hub
 
-*\<black box template\>*
+```{=html}
+```
 
-### \<Naam interface 1\> {#_naam_interface_1}
-
-...
-
-### \<Naam interface m\> {#_naam_interface_m}
-
-## Niveau 2 {#_niveau_2}
-
-### White Box *\<bouwsteen 1\>* {#_white_box_bouwsteen_1}
-
-*\<white box template\>*
-
-### White Box *\<bouwsteen 2\>* {#_white_box_bouwsteen_2}
-
-*\<white box template\>*
-
-...
-
-### White Box *\<bouwsteen m\>* {#_white_box_bouwsteen_m}
-
-*\<white box template\>*
-
-## Niveau 3 {#_niveau_3}
-
-### White Box *\<bouwsteen x.1\>* {#_white_box_bouwsteen_x_1}
-
-*\<white box template\>*
-
-### White Box *\<bouwsteen x.2\>* {#_white_box_bouwsteen_x_2}
-
-*\<white box template\>*
-
-### White Box *\<bouwsteen y.1\>* {#_white_box_bouwsteen_y_1}
-
-*\<white box template\>*
+### PLUGIN-Analytics

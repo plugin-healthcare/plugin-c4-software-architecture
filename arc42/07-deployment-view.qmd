@@ -1,4 +1,4 @@
-# Deployment View {#section-deployment-view}
+# Deployment View {#sec-deployment-view}
 
 ## Infrastructuur Niveau 1 {#_infrastructuur_niveau_1}
 

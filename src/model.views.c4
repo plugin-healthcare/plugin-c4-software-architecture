@@ -4,7 +4,7 @@ views {
     include data-gebruiker, data-houder, -> plugin
   }
 
-  view fph of plugin.fph {
+  view ph of plugin.ph {
     title 'Federated Processing Hub'
     include *
   }

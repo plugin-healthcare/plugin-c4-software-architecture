@@ -45,7 +45,7 @@ Old stubs (`intro.qmd`, `summary.qmd`) were deleted.
 ### 2. `_quarto.yml` — book metadata and format configuration
 
 - Set `book.title`: `"PLUGIN architectuur"`
-- Set `book.author`: `"Daniel Kapitan"`
+- Set `book.author`: `["Daniel Kapitan", "Madou Derksen"]`
 - Set `book.date`: `"25/03/2026"`
 - Updated `book.chapters` to list all 14 arc42 chapter files
 - Added `bibliography: plugin.bib`
@@ -56,7 +56,20 @@ Old stubs (`intro.qmd`, `summary.qmd`) were deleted.
   - `mainfont: Figtree` — sets the main font variable passed through pandoc
   - `template-partials: [typst-show.typ]` — instructs Quarto to use the project-local
     `typst-show.typ` instead of the one bundled with the orange-book extension
-- **HTML format settings:** `theme: [cosmo, brand]`
+- **HTML format settings:**
+  - `theme: [cosmo, brand]`
+  - `include-in-header` — injects a `<script module>` tag that loads `likec4-views.js`
+    from the co-deployed LikeC4 SPA at `/c4/`:
+
+    ```yaml
+    include-in-header:
+      - text: |
+          <script module src="https://plugin-healthcare.github.io/plugin-architecture/c4/likec4-views.js"></script>
+    ```
+
+    This script registers the `<likec4-view>` custom web component globally for all
+    HTML pages in the book. The URL points to the GitHub Pages deployment of the
+    LikeC4 SPA (built by `likec4 build --base "${BASE}/c4" --output _site/c4` in CI).
 
 ---
 
@@ -136,11 +149,67 @@ The custom `typst-show.typ` adds three rules relative to the orange-book origina
 
 ---
 
+### 5. `05-bouwstenen-view.qmd` — embedded LikeC4 interactive diagrams
+
+LikeC4 interactive diagrams are embedded in the HTML output of chapter 5 using the
+`<likec4-view>` custom web component, which is registered by `likec4-views.js` (injected
+globally via `include-in-header` in `_quarto.yml`, see Change 2).
+
+Each diagram is placed in a raw HTML block (`{=html}`) so Quarto passes it through
+unchanged to the HTML output without attempting to parse or transform it:
+
+````markdown
+```{=html}
+<likec4-view
+   view-id="<id>"
+   browser="true"
+   dynamic-variant="sequence">
+</likec4-view>
+```
+````
+
+The three views currently embedded are:
+
+| `view-id` | View defined in | Description |
+|-----------|----------------|-------------|
+| `__plugin` | auto-generated implicit view | Top-level PLUGIN system overview (actors + system) |
+| `datastation` | `src/model.views.c4` | Datastation subsystem detail |
+| `ph` | `src/model.views.c4` | Federated Processing Hub subsystem detail |
+
+**Key attributes used:**
+- `view-id` — matches the named view ID from `src/model.views.c4` (or the auto-generated
+  ID for implicit views, which use a double-underscore prefix, e.g. `__plugin`)
+- `browser="true"` — enables the interactive browser/explorer UI within the embedded
+  diagram (pan, zoom, click-through navigation)
+- `dynamic-variant="sequence"` — displays a sequence diagram variant when available
+
+**Integration flow:**
+
+```
+src/model.views.c4          (LikeC4 source: named views)
+        ↓  likec4 build
+_site/c4/likec4-views.js    (web component bundle, deployed at /c4/)
+        ↓  <script module> in <head> (injected by _quarto.yml include-in-header)
+05-bouwstenen-view.html     (Quarto HTML output: <likec4-view> tags resolved at runtime)
+```
+
+**Why raw HTML blocks, not shortcodes or figures:**
+Quarto shortcodes and figure syntax do not support arbitrary HTML attributes. Using
+`{=html}` passthrough blocks is the correct approach for embedding custom web components
+in Quarto markdown — Quarto treats the block as opaque HTML and writes it verbatim into
+the output page.
+
+**Typst/PDF output:** The `{=html}` blocks are silently ignored by the Typst renderer,
+so the PDF output simply omits the interactive diagrams. No fallback images are currently
+provided for the PDF.
+
+---
+
 ## File inventory
 
 ```
 arc42/
-├── _quarto.yml              # modified: title, author, chapters, typst font config
+├── _quarto.yml              # modified: title, authors, chapters, typst font config, likec4 header
 ├── _brand.yml               # defines Figtree font (source: google); unchanged
 ├── typst-show.typ           # NEW: custom Pandoc template partial for Typst output
 ├── fonts/                   # NEW: 14 Figtree .ttf files for self-contained font embedding
@@ -149,7 +218,7 @@ arc42/
 ├── 02-architectuur-kaders.qmd # NEW
 ├── 03-context-systeem-scope.qmd # NEW
 ├── 04-oplossing-strategie.qmd # NEW
-├── 05-bouwstenen-view.qmd   # NEW
+├── 05-bouwstenen-view.qmd   # modified: embeds 3 <likec4-view> web components
 ├── 06-runtime-view.qmd      # NEW
 ├── 07-deployment-view.qmd   # NEW
 ├── 08-crosscutting-concepten.qmd # NEW

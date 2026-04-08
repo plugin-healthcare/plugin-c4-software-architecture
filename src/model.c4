@@ -2,8 +2,8 @@ model {
     data-gebruiker = actor 'Data gebruiker' {
         description 'Een data gebruiker is een persoon die gezondheidsgegevens gebruikt voor onderzoek, innovatie of beleid.'
 
-        -> plugin.fph.plugin-ml 'ontwikkelt machine learning algoritmes met'
-        -> plugin.fph.vantage6-ui 'beheert federatieve samenwerking in'
+        -> plugin.ph.plugin-ml 'ontwikkelt machine learning algoritmes met'
+        -> plugin.ph.vantage6-ui 'beheert federatieve samenwerking in'
     }
     data-houder = actor 'Data houder' {
         description 'Een data houder is een persoon of organisatie die gezondheidsgegevens beheert en beschikbaar stelt aan data gebruikers.'
@@ -66,8 +66,9 @@ model {
                 }
             }
 
-            informatienmodellen = group 'Ondersteunde informatiemodellen' {
-                description 'Verschillende informatiemodellen worden ondersteund in PLUGIN-Lake.'
+            plugin-rosetta = component 'PLUGIN-Rosetta' {
+                description 'Ondersteuning van verschillende informatiemodellen incl. gevalideerde mappings.'
+                technology 'LinkML, Python'
                 omop = informationmodel 'OMOP CDM 5.4' {
                     description 'Informatiemodel waarin gezondheidsgegevens zijn opgeslagen volgens de OMOP Common Data Model (CDM) 5.4 specificaties.'
                 }
@@ -77,7 +78,7 @@ model {
                 lbz = informationmodel 'LBZ' {
                     description 'Informatiemodel waarin gezondheidsgegevens zijn opgeslagen volgens de Landelijke Basisregistratie Ziekenhuiszorg (LBZ) standaard.'
                 }
-                openehr = informationmodel 'OpenEHR' {
+                openehr = informationmodel 'openEHR' {
                     description 'Informatiemodel waarin gezondheidsgegevens zijn opgeslagen volgens de OpenEHR standaard.'
                     style {
                         color plugin-light-grey
@@ -86,9 +87,27 @@ model {
                 dcat = informationmodel 'DCAT' {
                     description 'Informatiemodel voor vastleggen van metadata.'
                     }
+                sssom = informationmodel 'SSSOM' {
+                    description 'Framework voor het vastleggen en onderhouden van gevalideerde mappings.'
+                }
+                fhir-omop = informationmodel 'FHIR-OMOP' {
+                    description 'Mapping van FHIR naar OMOP zoals bepaald in Vulcan project.'
+                    link https://hl7vulcan.org/projects/fhir-to-omop/
+                }
+                eos = informationmodel 'Eos openEHR to OMOP mapping' {
+                    description 'Mapping van FHIR naar OMOP zoals bepaald in Vulcan project.'
+                    link https://github.com/SevKohler/Eos
+
+                fhir -> fhir-omop 'input voor'
+                fhir-omop -> omop 'mapped naar naar'
+                fhir-omop -> sssom 'vastgelegd in'
+                openehr -> eos 'input voor'
+                eos -> omop 'mapped naar'
+                eos -> sssom 'vastgelegd in'
+                '
             }
 
-            plugin-lake -> informatienmodellen 'implementeert'
+            plugin-lake -> plugin-rosetta 'implementeert'
         }
 
         vantage6-node -> algoritme-container 'zet op, configureert en stuurt resultaten door van'
@@ -98,7 +117,7 @@ model {
         dagster-deamon -> plugin-lake.dagster-ducklake-iomanager 'leest en schrijft data via'
         
 
-        fph = system 'Federated Processing Hub' {
+        ph = system 'Processing Hub' {
             description 'Een federatieve data processing systeem dat voldoet aan de eisen van beveiligde verwerkingsomgeving (BVO).'
 
             vantage6-server = container 'vantage6 server' {
@@ -167,8 +186,8 @@ model {
 
 
         data-houder -> plugin.datastation 'maakt data beschikbaar via'
-        data-gebruiker -> plugin.fph 'werkt voor secundair gebruik in/met'
-        plugin.fph.vantage6-server -> plugin.datastation.vantage6-node 'stuurt taken naar'
-        plugin.datastation.vantage6-node -> plugin.fph.vantage6-server 'stuurt resultaten terug naar'
+        data-gebruiker -> plugin.ph 'werkt voor secundair gebruik in/met'
+        plugin.ph.vantage6-server -> plugin.datastation.vantage6-node 'stuurt taken naar'
+        plugin.datastation.vantage6-node -> plugin.ph.vantage6-server 'stuurt resultaten terug naar'
     
 }

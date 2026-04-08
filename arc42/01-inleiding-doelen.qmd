@@ -228,7 +228,7 @@ Naast de functionele eisen, streeft PLUGIN ernaar om de kwaliteitseisen zoals in
 |OPR-10 | BVO-operator MOET een operationeel informatiebeveiligingsmanagementsysteem (ISMS) hebben |
 |OPR-11 | BVO-operator ZOU een Servicemanagementsysteem moeten opzetten |
 |OPR-12 | BVO-operators MOETEN regelmatig gegevensbeschermingseffectbeoordelingen (DPIA's) uitvoeren |
-[TODO]|OPR-13 | BVO-operator MOET beleid handhaven om beveiliging rond inkoopsystemen en ontwikkeling en gebruik van systemen te waarborgen | |
+|OPR-13 | BVO-operator MOET beleid handhaven om beveiliging rond inkoopsystemen en ontwikkeling en gebruik van systemen te waarborgen | |
 |OPR-14 | BVOs ZOUDEN een wijzigingsbeheerproces met impact- en risicobeoordeling moeten hanteren |
 |OPR-15 | BVO-operator ZOU een release- en implementatiebeheerproces moeten hanteren |
 |OPR-16 | BVO-operator MOET acties van elk geautoriseerd projectlid volgen en loggen, inclusief gevallen van datatoegang, verwerking, weergave en output |
