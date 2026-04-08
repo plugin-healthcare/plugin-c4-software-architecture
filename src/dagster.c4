@@ -1,5 +1,6 @@
 model {
-    extend dagster {
+    dagster = system 'Dagster' {
+        description 'Orchestration of datapipelines.'
         asset = component 'Asset' {
             technology 'Dagster'
             description 'An asset represents a logical unit of data such as a table, dataset, or machine learning model. Assets can have dependencies on other assets, forming the data lineage for your pipelines. As the core abstraction in Dagster, assets can interact with many other Dagster entities to facilitate certain tasks. When you define an asset, either with the @dg.asset decorator or via a component, the definition is automatically added to a top-level Definitions object.'

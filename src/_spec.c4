@@ -1,18 +1,34 @@
 specification {
+
+    color plugin-dark-blue #053c5b
+    color plugin-teal #0588a6
+    color plugin-light-blue #bbe2ee
+    color plugin-orange #f28729
+    color plugin-light-grey #F2F2F2
+
     element system {
         style {
+            color plugin-dark-blue
             textSize xl
         }
     }
     element actor {
         style {
             shape person
-            color amber
+            color plugin-orange
+        }
+    }
+
+    element ui {
+        style {
+            shape browser
+            color plugin-teal
         }
     }
     element container {
         style {
             shape component
+            color plugin-light-blue
             textSize large
         }
     }
@@ -26,6 +42,22 @@ specification {
     element datastore {
         style {
             shape storage
+            color gray
+        }
+    }
+
+    element informationmodel {
+        style {
+            shape document
+            color gray
+        }
+    }
+
+    element group {
+        style {
+            color gray
+            border dotted
+            opacity 10%
         }
     }
 }

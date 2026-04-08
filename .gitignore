@@ -6,3 +6,4 @@ test/likec4-model.ts
 relationships.csv
 react/
 .DS_Store
+/.likec4/

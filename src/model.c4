@@ -19,66 +19,79 @@ model {
                 description 'Component die verantwoordelijk is voor het uitvoeren van federatieve berekeningen op de data van een data houder, inclusief het ontvangen van taken, uitvoeren van algoritmes en terugsturen van resultaten.'
             }
 
-            plugin-lake-ui = container 'PLUGIN-Lake UI' {
+            plugin-lake-ui = ui 'PLUGIN-Lake UI' {
                 description 'Component die lakehouse functionaliteit biedt voor het opslaan en beheren van grote hoeveelheden gestructureerde en ongestructureerde data.'
             }
 
-            dagster-ui = container 'Dagster UI' {
+            dagster-ui = ui 'Dagster UI' {
                 description 'Component die een interface biedt voor het ontwerpen, plannen en monitoren van data pipelines.'
 
-                -> plugin-lake-server.dagster-deamon 'stuurt opdrachten naar en ontvangt status updates van'
+                -> dagster-deamon 'stuurt opdrachten naar en ontvangt status updates van'
             }
 
+            dagster-deamon = container 'Dagster Daemon' {
+                    description 'Component die verantwoordelijk is voor het uitvoeren van geplande taken en het monitoren van de status van data pipelines in Dagster.'
+                }
             algoritme-container = container 'Algoritme container' {
                 description 'Component die machine learning algoritmes en modellen bevat die kunnen worden uitgevoerd op het datastation.'
             }
 
-            plugin-lake-server = container 'PLUGIN-Lake Server' {
+            plugin-lake = system 'PLUGIN-Lake' {
                 description ''
-                -> fhir 'slaat data op in'
-                -> omop 'slaat data op in'
-                -> lbz 'slaat data op in'
-                -> openehr 'slaat data op in'
 
-                ducklake = container 'DuckLake' {
-                    description 'Lakehouse storage layer met ondersteuning voor verschillende opslagformaten en query engines.'
+
+                plugin-lake-api = component 'PLUGIN-Lake API' {
+                    description 'single gateway voor PLUGIN-Lake.'
                 }
 
-                plugin-lake-api = container 'PLUGIN-Lake API' {
-                    description 'API die toegang biedt DuckLake.'
-                    -> ducklake 'leest data van en schrijft data naar'
+                ducklake = component 'DuckLake' {
+                    description 'Open standaard voor lakehouse data opslag.'
+                    catalog = component 'Catalog database' {
+                        description 'DuckLake uses SQL tables and queries to define the catalog information (metadata, statistics, etc.). The DuckLake specification explains the schema and semantics of these.'
+                        link https://ducklake.select/docs/stable/specification/introduction
+                    }
+                    data = component 'Data storage' {
+                        description 'DuckLake uses Parquet files to represent its tables. These files can be stored in object storage (blob storage), block storage or file storage.'
+                    }
                 }
 
-                dagster-deamon = container 'Dagster Daemon' {
-                    description 'Component die verantwoordelijk is voor het uitvoeren van geplande taken en het monitoren van de status van data pipelines in Dagster.'
-                }
-            }
-
-            omop = datastore 'OMOP CDM 5.4' {
-                description 'Datastore waarin gezondheidsgegevens zijn opgeslagen volgens de OMOP Common Data Model (CDM) 5.4 specificaties.'
-            }
-
-            fhir = datastore 'FHIR' {
-                description 'Datastore waarin gezondheidsgegevens zijn opgeslagen volgens de FHIR (Fast Healthcare Interoperability Resources) standaard.'
-            }
-
-            lbz = datastore 'LBZ' {
-                description 'Datastore waarin gezondheidsgegevens zijn opgeslagen volgens de Landelijke Basisregistratie Ziekenhuiszorg (LBZ) standaard.'
-            }
-
-            openehr = datastore 'OpenEHR' {
-                description 'Datastore waarin gezondheidsgegevens zijn opgeslagen volgens de OpenEHR standaard.'
-                style {
-                    color muted
+                dagster-ducklake-iomanager = component 'Dagster DuckLake IO manager' {
+                    description 'Dagster extension for managing IO to DuckLake'
+                    -> ducklake 'leest en schrijft (meta)data naar'
                 }
             }
 
+            informatienmodellen = group 'Ondersteunde informatiemodellen' {
+                description 'Verschillende informatiemodellen worden ondersteund in PLUGIN-Lake.'
+                omop = informationmodel 'OMOP CDM 5.4' {
+                    description 'Informatiemodel waarin gezondheidsgegevens zijn opgeslagen volgens de OMOP Common Data Model (CDM) 5.4 specificaties.'
+                }
+                fhir = informationmodel 'FHIR Profiel' {
+                    description 'Informatiemodel waarin gezondheidsgegevens zijn opgeslagen volgens de FHIR (Fast Healthcare Interoperability Resources) standaard.'
+                }
+                lbz = informationmodel 'LBZ' {
+                    description 'Informatiemodel waarin gezondheidsgegevens zijn opgeslagen volgens de Landelijke Basisregistratie Ziekenhuiszorg (LBZ) standaard.'
+                }
+                openehr = informationmodel 'OpenEHR' {
+                    description 'Informatiemodel waarin gezondheidsgegevens zijn opgeslagen volgens de OpenEHR standaard.'
+                    style {
+                        color plugin-light-grey
+                    }
+                }
+                dcat = informationmodel 'DCAT' {
+                    description 'Informatiemodel voor vastleggen van metadata.'
+                    }
+            }
 
-            plugin-lake-ui -> plugin-lake-server 'interface voor inzage in orchestratie en data'
-            vantage6-node -> algoritme-container 'zet op, configureert en stuurt resultaten door van'
-            algoritme-container -> plugin-lake-server 'leest data van en schrijft tijdelijke resultaten naar'
-
+            plugin-lake -> informatienmodellen 'implementeert'
         }
+
+        vantage6-node -> algoritme-container 'zet op, configureert en stuurt resultaten door van'
+        algoritme-container -> plugin-lake 'leest data van en schrijft tijdelijke resultaten naar'
+        plugin-lake-ui -> plugin-lake 'interface voor inzage in orchestratie en data'
+        plugin-lake.plugin-lake-api -> dagster-deamon 'initeert taken en jobs voor'
+        dagster-deamon -> plugin-lake.dagster-ducklake-iomanager 'leest en schrijft data via'
+        
 
         fph = system 'Federated Processing Hub' {
             description 'Een federatieve data processing systeem dat voldoet aan de eisen van beveiligde verwerkingsomgeving (BVO).'
@@ -98,7 +111,7 @@ model {
 
             }
 
-            vantage6-ui = container 'vantage6 UI' {
+            vantage6-ui = ui 'vantage6 UI' {
                 description 'Webapplicatie waarmee data gebruikers federatieve berekeningen kunnen initiëren en beheren, en algoritmes kunnen bekijken.'
             }
 
@@ -113,12 +126,12 @@ model {
             plugin-analytics = container 'PLUGIN-Analytics' {
                 description 'Component die analytische tools en visualisaties biedt voor het interpreteren van resultaten van federatieve berekeningen.'
                 style {
-                    color muted
+                    color plugin-light-grey
                 }
                 duhden-portaal = container 'DUHDEN Portaal' {
                     description 'Component die een portaal biedt voor data gebruikers om toegang te krijgen tot OMOP databases.'
                     style {
-                        color muted
+                        color plugin-light-grey
                     }
                 }
                 -> some-server 'wordt uitgevoerd via'
@@ -131,9 +144,9 @@ model {
             some-server = container 'Nader te bepalen server' {
                 description 'Centrale component voor federated analytics.'
                 style {
-                    color muted
+                    color plugin-light-grey
                 }
-                -> plugin.datastation.plugin-lake-server 'voert federatieve analyses uit via'
+                -> plugin.datastation.plugin-lake 'voert federatieve analyses uit via'
             }
 
             blob-storage = datastore 'Blob Storage' {
@@ -152,6 +165,5 @@ model {
         data-gebruiker -> plugin.fph 'werkt voor secundair gebruik in/met'
         plugin.fph.vantage6-server -> plugin.datastation.vantage6-node 'stuurt taken naar'
         plugin.datastation.vantage6-node -> plugin.fph.vantage6-server 'stuurt resultaten terug naar'
-    }
-    dagster = system 'Dagster'
+    
 }
