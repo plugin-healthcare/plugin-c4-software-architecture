@@ -26,8 +26,6 @@ book:
     - 12-woordenlijst.qmd
     - references.qmd
   appendices:
-    - text: C4 architectuur diagrammen
-      href: https://plugin-healthcare.github.io/plugin-architecture/c4
     - architectuur-dataspaces.qmd
 
 bibliography: plugin.bib

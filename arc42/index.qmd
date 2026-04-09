@@ -1,5 +1,9 @@
 # Voorwoord {.unnumbered}
 
+Dit document is opgesteld door DHD ten behoeve van de verdere uitrol en doorontwikkeling van PLUGIN. Het is opgesteld met de arc42 architectuur template. Daarbij is de architectuur uitgewerkt in een [C4 model](https://c4model.com/). Daarbij is de [likec4](https://likec4.dev/) tool gebruikt om een interactive website van de hele architectuur te genereren. De diagrammen in dit document verwijzen naar dat C4 model. Het is direct te benaderen via [https://plugin-healthcare.github.io/plugin-architecture/c4](https://plugin-healthcare.github.io/plugin-architecture/c4).
+
+Dit werk is gelicenseerd onder een [Creative Commons Naamsvermelding 4.0 Internationaal licentie](https://creativecommons.org/licenses/by/4.0/).
+
 **Over arc42**
 
 © Dit document maakt gebruikt van de arc42 architectuur template, <https://arc42.org>. arc42 is een template voor documentatie van software en systeem architectuur, gecreeerd en onderhouden door Dr. Peter Hruschka, Dr. Gernot Starke en de open source community.
