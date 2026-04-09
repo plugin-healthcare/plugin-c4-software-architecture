@@ -25,26 +25,20 @@ model {
 
             dagster-ui = ui 'Dagster UI' {
                 description 'Applicatie die een interface biedt voor het ontwerpen, plannen en monitoren van data pipelines.'
-
                 -> dagster-deamon 'stuurt opdrachten naar en ontvangt status updates van'
             }
-
             dagster-deamon = container 'Dagster Daemon' {
                     description 'Applicatie die verantwoordelijk is voor het uitvoeren van geplande taken en het monitoren van de status van data pipelines in Dagster.'
-                }
+            }
             algoritme-container = container 'Algoritme container' {
                 description 'Component die machine learning algoritmes en modellen bevat die kunnen worden uitgevoerd op het datastation.'
             }
-
             plugin-lake = system 'PLUGIN-Lake' {
                 description ''
-
-
                 plugin-lake-api = component 'PLUGIN-Lake API' {
                     description 'single gateway voor PLUGIN-Lake.'
                     technology 'FastAPI, Python'
                 }
-
                 ducklake = component 'DuckLake' {
                     description 'Open standaard voor lakehouse data opslag.'
                     link https://ducklake.select/docs/stable/specification/introduction
@@ -58,7 +52,6 @@ model {
                         technology 'S3-compatible storage'
                     }
                 }
-
                 dagster-ducklake-iomanager = component 'Dagster DuckLake IO manager' {
                     description 'Dagster extension for managing IO to DuckLake'
                     technology 'Python'
@@ -104,9 +97,8 @@ model {
                 openehr -> eos 'input voor'
                 eos -> omop 'mapped naar'
                 eos -> sssom 'vastgelegd in'
-                
+                }
             }
-
             plugin-lake -> plugin-rosetta 'implementeert'
         }
 
@@ -116,7 +108,6 @@ model {
         plugin-lake.plugin-lake-api -> dagster-deamon 'initeert taken en jobs voor'
         dagster-deamon -> plugin-lake.dagster-ducklake-iomanager 'leest en schrijft data via'
         
-
         ph = system 'Processing Hub' {
             description 'Een federatieve data processing systeem dat voldoet aan de eisen van beveiligde verwerkingsomgeving (BVO).'
 
