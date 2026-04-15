@@ -1,14 +1,50 @@
 # Architectuur Beslissingen {#section-design-decisions}
 
-*\<Belangrijke, kostbare, kritische, grootschalige of risicovolle architectuurbeslissingen inclusief rationale. Gebruik ADR (Architecture Decision Records) formaat waar van toepassing.\>*
+De meest actuele overzicht van architectuur beslissingen staan op [github.com/plugin-healthcare](https://github.com/plugin-healthcare). Hieronder is een samenvatting. In geval van discrepanties is de GitHub repository leidend.
 
+## [PLUGIN-Lake](https://github.com/plugin-healthcare/pluginlake/blob/dev/docs/decisions/README.md)
 
-This directory contains Architecture Decision Records (ADRs) for the pluginlake project.
+::: {.list-table tbl-colwidths="[15,55,15,15]"}
 
-| ID                                              | Title                                           | Status   | Date       |
-| ----------------------------------------------- | ----------------------------------------------- | -------- | ---------- |
-| [ADR-001](adr-001-asset-architecture.md)        | Asset architecture and extensibility            | Accepted | 2026-02-17 |
-| [ADR-002](adr-002-omop-storage-architecture.md) | OMOP data storage architecture                  | Proposed | 2026-02-17 |
-| [ADR-003](adr-003-ducklake-data-catalog.md)     | DuckLake integration with Dagster + logging      | Proposed | 2026-02-23 |
-| [ADR-004](adr-004-data-organization.md)         | Data organization and naming conventions         | Proposed | 2026-02-24 |
-| [ADR-005](adr-005-fastapi-gateway.md)           | FastAPI as unified API gateway                   | Proposed | 2026-03-05 |
+- - ID
+  - Title
+  - Status
+  - Date
+
+- - [ADR-001](https://github.com/plugin-healthcare/pluginlake/blob/dev/docs/decisions/adr-001-asset-architecture.md)
+  - Asset architecture and extensibility
+  - Accepted 
+  - 2026-02-17
+
+- - [ADR-002](https://github.com/plugin-healthcare/pluginlake/blob/dev/docs/decisions/adr-002-omop-storage-architecture.md)
+  - OMOP data storage architecture
+  - Proposed
+  - 2026-02-17
+
+- - [ADR-003](https://github.com/plugin-healthcare/pluginlake/blob/dev/docs/decisions/adr-003-ducklake-data-catalog.md)
+  - DuckLake integration with Dagster + logging
+  - Proposed
+  - 2026-02-23
+
+- - [ADR-004](https://github.com/plugin-healthcare/pluginlake/blob/dev/docs/decisions/adr-004-data-organization.md)
+  - Data organization and naming conventions
+  - Proposed
+  - 2026-02-24
+
+- - [ADR-005](https://github.com/plugin-healthcare/pluginlake/blob/dev/docs/decisions/adr-005-fastapi-gateway.md)
+  - FastAPI as unified API gateway
+  - Proposed
+  - 2026-03-05
+
+- - [ADR-006](https://github.com/plugin-healthcare/pluginlake/pull/105/changes#diff-5af550ecfe82d86872269cb5e5a1b527357a5945b9f6554632e94a02e0e10431)
+  - Nuts Node for decentralized authentication and authorization
+  - Draft
+  - 2026-04-01
+
+- - ADR-007
+  - OpenLineage for column-level lineage
+  - Draft
+  - 2026-04-01
+  
+:::
+

@@ -39,9 +39,31 @@ In de beschrijving van datastations gaan we dus uit van een processing hub als e
 
 Daarnaast moet het in de context van de EHDS mogelijk zijn om te werken met _federations of federations_. De hybride architectuur van PLUGIN die we voor ogen hebben kent een gelaagdheid van knooppunten. Denk bijvoorbeeld aan een zorginstelling die participeert in een regionaal samenwerkingsverband, waarbij vervolgens verschillende regionale knooppunten opgaan in een landelijk netwerk. Daarbovenop kunnen landelijke knooppunten onderdeel uitmaken van een Europese federatie. In de uitwerking van de architectuur gaan we daarom uit van een _decentraal netwerk_ dat een gelaagdheid kent van meerdere netwerken, elk met een centrale coordinator (netwerk type b in bovenstaande illustratie).
 
+Alhoewel het idee van federatieve analyse al een tijdje bestaat, is het goed om op te merken dat er nog weinig _real-world_ toepassingen van federated learninig en federated analytics zijn in de wereld. Een review studie uit 2025 constateert dat _"none of the papers provided evidence about the deployment of their FL platform in a healthcare environment"_.[^strategie-6] Uitdagingen op het gebied van (netwerk) communicatie, metadata, encryptie en authenticatie zullen komende jaren nog robuuster geimplementeerd moeten worden om het concept van federatieve analyse vanuit een onderzoeksomgeving naar de dagelijkse praktijk te brengen. 
+
 ## Composable datastations
 
-De datastations zijn ontworpen met de principes van de composable data stack[^strategie-6]:
+Onze ontwerp van een datastation is erop gericht om een viertal uitdagingen op te lossen[^strategie-7]:
+
+- **C1. De berekening naar de data:** dategebruikers moeten berekeningen kunnen initieren op datastations zonder dat ze daarbij de data direct kunnen zien.
+- **C2. Data verkenning en integratie:** datastations moeten functionaliteit ondersteunen om data te transformeren en beschikbaar te stellen.
+- **C3. Ongelimiteerde berekeningen:** daar waar traditionele dataplatformen uit gaan van een beperkte set van berekeningen die op de data uitgevoerd mogen worden, moet een datastation veel verschillende soorten berekeningen kunnen faciliteren.
+- **C4. Data governance en toegang:** datastations moeten fijnmazige èn gedecentraliseerde mechanismen hebben om registratie, identificatie en authorisatie van gebruikers en data(producten) te ondersteunen.
+
+::: {.callout-warning collapse="true"}
+
+## Pragmatische evolutie van het concept van datastations
+
+Het concept van datastations is relatief nieuw en er is vooralsnog geen standaard definitie. Het werk van @fernandez2020data, @xia2022data, @boninodasilvasantos2022personal, @welten2024pasta4pht en @choudhury2025advancing sluiten het meest aan bij het ontwerp van een PLUGIN datastation. Tegelijkertijd zien we op een aantal punten al verschillen:
+
+- Zo gaan wij wel uit van een uniform dataschema en zetten wij praktische grenzen aan wat op een datastation qua berekeningen uitgevoerd mag worden. @fernandez2020data doen dat niet.
+- @xia2022data gaan uit van een datastation dat bij een _trusted third party_ draait, een zogenaamde _escrow_; wij gaan ervan uit dat het datastation onder verantwoordelijkheid van de datahouder draait en zoveel als mogelijk in de IT infrastructuur van de datahouder is ingebed. 
+
+We zijn hierin echter pragmatisch en verwachten dat in de komende jaren het concept zal doorevolueren
+
+:::
+
+De datastations zijn ontworpen met de principes van de composable data stack[^strategie-8]:
 
 1. **Modulariteit:** Componenten (bouwstenen) kunnen onafhankelijk van elkaar worden vervangen of geschaald.
 2. **Interoperabiliteit:** Dankzij open standaarden kunnen verschillende systemen zonder kostbare conversies samenwerken.
@@ -78,14 +100,14 @@ De catalogus in de composable data stack refereert naar het information schema v
 :::
 :::
 
-Parallel aan de decompositie van dataverwerkingssystemen is de capaciteit van _single-node processing units_ zodanig toegenomen dat het inmiddels mogelijk is om tot circa 10 TB aan data op een enkele machine te verwerken en analyseren.[^strategie-7] In het ontwerp van een datastation gaan we er dus vanuit dat het systeem als geheel op een (virtuele) machine past, wat de complexiteit van een datastation aanzienlijk vereenvoudigd.
+Parallel aan de decompositie van dataverwerkingssystemen is de capaciteit van _single-node processing units_ zodanig toegenomen dat het inmiddels mogelijk is om tot circa 10 TB aan data op een enkele machine te verwerken en analyseren.[^strategie-9] In het ontwerp van een datastation gaan we er dus vanuit dat het systeem als geheel op een (virtuele) machine past, wat de complexiteit van een datastation aanzienlijk vereenvoudigd.
 
 [^strategie-1]: @buschmann1996system
 [^strategie-2]: @baran1964distributed
 [^strategie-3]: @rieke2020future
 [^strategie-4]: @heimbigner1985federated
 [^strategie-5]: @mcmahan2017communication
-[^strategie-6]: @pedreira2023composable, @pedreira2024composable
-[^strategie-7]: @raasveldt2019duckdb, @nahrstedt2024empirical
-
-
+[^strategie-6]: @zhang2024recent
+[^strategie-7]: We volgen hiern het werk van @fernandez2020data en @xia2022data
+[^strategie-8]: @pedreira2023composable, @pedreira2024composable
+[^strategie-9]: @raasveldt2019duckdb, @nahrstedt2024empirical

@@ -73,12 +73,9 @@ Het datastation is de hoeksteen van de PLUGIN architectuur. Het datastation zien
 Wanneer een datahouder gezondheidsgegevens beschikbaar heeft gesteld op het datastation wil dat niet zeggen dat het daarmee meteen toegankelijk is voor iedereen. Zoals in @sec-requirementsoverzicht is geschetst, wordt er een onderscheid gemaakt in _data preparation_ (beschikbaar maken) en _use of data_ (gebruik van data). Het is de bedoeling dat elk verzoek voor gebruik van data via een vergunning of een gegevensverzoek afzonderlijk wordt beoordeeld, zoals in de EHDS is voorgeschreven. Het datastation richt zich met name op het gestandaardiseerd beschikbaar maken van data zodat datahouders zich effectief en efficient kunnen voorbereiden op (toekomstig) secundair gebruik van data.
 :::
 
-
-[^1]: In analogie met de telecommunicatie industrie kan je het datastation zien als het [ISRA-punt]. Het is het scheidingspunt tussen 'de binnenkant' van de datahouder (analogie: de randapparatuur in het huis) en 'de buitenkant' (analogie: het telecomnetwerk).
-
 :::{.list-table tbl-colwidths="[15,50,35]"}
 
-- - Component
+- - Niveau 3
   - Verantwoordelijkheid
   - Interfaces
 
@@ -177,7 +174,7 @@ De verschillende componenten van Dagster zijn opgenomen in de verschillende sub-
 ```
 :::{.list-table tbl-colwidths="[15,50,35]"}
 
-- - Component
+- - Niveau 3
   - Verantwoordelijkheid
   - Interfaces
 
@@ -237,3 +234,5 @@ De verschillende componenten van Dagster zijn opgenomen in de verschillende sub-
 Dit deel van de architectuur is nog in ontwikkeling.
 
 :::
+
+[^1]: In analogie met de telecommunicatie industrie kan je het datastation zien als het [ISRA-punt](https://nl.wikipedia.org/wiki/ISRA). Het is het scheidingspunt tussen 'de binnenkant' van de datahouder (analogie: de randapparatuur in het huis) en 'de buitenkant' (analogie: het telecomnetwerk).
