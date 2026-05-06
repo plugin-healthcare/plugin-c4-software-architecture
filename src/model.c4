@@ -124,7 +124,7 @@ model {
                     description 'Database waarin gegevens worden opgeslagen die nodig zijn voor het beheren van federatieve berekeningen, zoals gebruikersinformatie, berekeningsverzoeken, taakstatussen en resultaten.'
                 }
             }
-            centrale-aggregratie-server = component 'Centrale aggregratie server' {
+            centrale-aggregatie-server = component 'Centrale aggregratie server' {
                 description 'Component waarin resultaten worden combineerd en geaggreeerd'
                 technology 'Python'
             }

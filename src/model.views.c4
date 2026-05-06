@@ -24,19 +24,19 @@ views {
     title 'Federated Learning'
     data-gebruiker -> plugin.ph.vantage6-server 'Authenticatie'
     data-gebruiker -> plugin.ph.vantage6-server 'Taak specificatatie (Server API)'
-    plugin.ph.vantage6-server <- plugin.ph.centrale-aggregratie-server 'Hoofdtaak ophalen'
-    plugin.ph.centrale-aggregratie-server -> plugin.ph.algoritme-register 'Docker-image ophalen (hoofdtaak)'
-    plugin.ph.vantage6-server <- plugin.ph.centrale-aggregratie-server 'Subtaken aanmaken'
+    plugin.ph.vantage6-server <- plugin.ph.centrale-aggregatie-server 'Hoofdtaak ophalen'
+    plugin.ph.centrale-aggregatie-server -> plugin.ph.algoritme-register 'Docker-image ophalen (hoofdtaak)'
+    plugin.ph.vantage6-server <- plugin.ph.centrale-aggregatie-server 'Subtaken aanmaken'
 
-    parallel '(Voor elke subtaak parallel uitgevoerd)' {
-      plugin.datastation.vantage6-node -> plugin.ph.centrale-aggregratie-server 'Subtaak ophalen'
+    parallel {
+      plugin.datastation.vantage6-node -> plugin.ph.centrale-aggregatie-server 'Subtaak ophalen'
       plugin.datastation.vantage6-node -> plugin.ph.algoritme-register 'Docker image ophalen (subtaak)'
       plugin.datastation.vantage6-node -> plugin.ph.vantage6-server 'Resultaat van subtaak opslaan'
-      plugin.ph.vantage6-server <- plugin.ph.centrale-aggregratie-server 'Subtaakresultaten ophalen'
-      plugin.ph.centrale-aggregratie-server -> plugin.ph.centrale-aggregratie-server 'Verificatie en aggregatie'
+      plugin.ph.vantage6-server <- plugin.ph.centrale-aggregatie-server 'Subtaakresultaten ophalen'
+      plugin.ph.centrale-aggregatie-server -> plugin.ph.centrale-aggregatie-server 'Verificatie en aggregatie'
     }
 
-    plugin.ph.centrale-aggregratie-server -> plugin.ph.vantage6-server 'Eindresultaat van hoofdtaak indienen'
+    plugin.ph.centrale-aggregatie-server -> plugin.ph.vantage6-server 'Eindresultaat van hoofdtaak indienen'
     data-gebruiker -> plugin.ph.vantage6-server 'Eindresultaat ophalen'
 
     include plugin.ph, plugin.datastation
