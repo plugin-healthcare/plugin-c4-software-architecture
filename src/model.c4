@@ -95,17 +95,16 @@ model {
                 eos = informationmodel 'Eos openEHR to OMOP mapping' {
                     description 'Mapping van FHIR naar OMOP zoals bepaald in Vulcan project.'
                     link https://github.com/SevKohler/Eos
-
+                }
                 fhir -> fhir-omop 'input voor'
                 fhir-omop -> omop 'mapped naar naar'
                 fhir-omop -> sssom 'vastgelegd in'
                 openehr -> eos 'input voor'
                 eos -> omop 'mapped naar'
                 eos -> sssom 'vastgelegd in'
-                }
             }
-            plugin-lake -> plugin-rosetta 'implementeert'
         }
+            plugin-lake -> plugin-rosetta 'implementeert'
 
         vantage6-node -> algoritme-container 'zet op, configureert en stuurt resultaten door van'
         algoritme-container -> plugin-lake 'leest data van en schrijft tijdelijke resultaten naar'
@@ -115,22 +114,20 @@ model {
         
         ph = system 'Processing Hub' {
             description 'Een federatieve data processing systeem dat voldoet aan de eisen van beveiligde verwerkingsomgeving (BVO).'
-
             vantage6-server = container 'vantage6 server' {
                 description 'Component die verantwoordelijk is voor het beheren van federatieve berekeningen, inclusief het ontvangen van berekeningsverzoeken, coördineren van taken en verzamelen van resultaten.'
-
                 vantage6-client = component 'vantage6 client' {
                     description 'CLI voor programmatisch aansturen van vantage6 server.'
                     technology 'Python'
-                }
-
+                }            
                 vantage6-database = datastore 'vantage6 database' {
                     description 'Database waarin gegevens worden opgeslagen die nodig zijn voor het beheren van federatieve berekeningen, zoals gebruikersinformatie, berekeningsverzoeken, taakstatussen en resultaten.'
                 }
-                -> blob-storage 'maakt gebruik van'
-
             }
-
+            centrale-aggregratie-server = component 'Centrale aggregratie server' {
+                description 'Component waarin resultaten worden combineerd en geaggreeerd'
+                technology 'Python'
+            }
             vantage6-ui = ui 'vantage6 UI' {
                 description 'Webapplicatie waarmee data gebruikers federatieve berekeningen kunnen initiëren en beheren, en algoritmes kunnen bekijken.'
             }
@@ -176,6 +173,7 @@ model {
 
             vantage6-ui -> vantage6-server 'grafische interface voor beheren federatieve berekeningen'
             vantage6-server -> algoritme-register 'slaat goedgekeurde algoritmes op in'
+            vantage6-server -> blob-storage 'maakt gebruik van'
             plugin-ml -> vantage6-server 'wordt uitgevoerd via'
             plugin-hub -> vantage6-server 'wordt uitgevoerd via'
         }
