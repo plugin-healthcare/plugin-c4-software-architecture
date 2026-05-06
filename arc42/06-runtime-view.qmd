@@ -55,4 +55,10 @@ Voor gefedereerd leren maakt PLUGIN gebruik van vantage6. Het gefedereerd leren 
 
 ## Data aanlevering
 
+In de eerste versie van PLUGIN is voor data aanlevering gebruik gemaakt van vantage6. De _runtime_ view voor deze usecase is dus hetzelfde zoals hierboven beschreven, met dien verstande dat er geen centrale aggregatie functie wordt gebruikt. Onderstaand diagram geeft een vereenvoudige weergave van deze usecase. 
+
+TO DO: add reference to draft paper.
+
+![Data aanlevering zoals is gerealiseerd in de pilot met IKNL en Radboudumc voor geautomatiseerde aanlevering van gegevens vanuit het bronsysteem (EPD (EPIC)) naar de hoofd-hals kankerregistratie (NCR).](images/iknl-radboud.png)
+
 ## Data analytics

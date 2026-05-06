@@ -59,7 +59,7 @@ Het concept van datastations is relatief nieuw en er is vooralsnog geen standaar
 - Zo gaan wij wel uit van een uniform dataschema en zetten wij praktische grenzen aan wat op een datastation qua berekeningen uitgevoerd mag worden. @fernandez2020data doen dat niet.
 - @xia2022data gaan uit van een datastation dat bij een _trusted third party_ draait, een zogenaamde _escrow_; wij gaan ervan uit dat het datastation onder verantwoordelijkheid van de datahouder draait en zoveel als mogelijk in de IT infrastructuur van de datahouder is ingebed. 
 
-We zijn hierin echter pragmatisch en verwachten dat in de komende jaren het concept zal doorevolueren
+We zijn hierin echter pragmatisch en verwachten dat in de komende jaren het concept zal doorevolueren.
 
 :::
 

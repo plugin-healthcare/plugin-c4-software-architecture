@@ -2,31 +2,50 @@
 
 ## Business context {#_business_context}
 
-PLUGIN is in essentie een data space, waarbij we uit gaan van een 4-corner. De business context wordt voor een groot deel bepaald door de huidige blauwdrukken die voor de EHDS zijn ontworpen. Onderstaand figuur is daar een samenvatting van. Voor meer details verwijzen we naar de [architectuur van data spaces](architectuur-dataspaces.qmd).
+PLUGIN is in essentie een data space, waarbij we uit gaan van een intermediarmodel (_4-corner model_). De business context wordt enerzijdsbepaald door de bestaande rol die DHD en IKNL hebben als intermediar voor secundair gebruik, als ook de nieuwe blauwdrukken die voor de inrichting van de EHDS zijn opgesteld. Voor meer details verwijzen we naar de [architectuur van data spaces](architectuur-dataspaces.qmd).
 
-![PLUGIN als een data space in een 4-corner model.](./images/datastation-4corner.drawio.svg)
+### Het intermediarmodel
 
+![PLUGIN als een data space in een intermediarmodel met _four corners_.](./images/datastation-4corner.drawio.svg)
 
+Een belangrijk uitgangspunt voor de inrichting van een dataspace is het dienstverleningsmodel, waarvoor verschillende modellen bestaan. Voor PLUGIN gaan we uit van de meest gangbare inrichting, namelijk het intermediarmodel waarbij meerdere dienstverleners actief zijn binnen de dataspace. Gegeven de diversiteit van datagebruikers en datahouders, en ook verschillende soorten usecases, ligt een dergelijk model het meest voor de hand. Zo kunnen deelnemers op verschillende manieren worden aangesloten op de dataspace, terwijl tegelijkertijd de risico’s van eenzijdige afhankelijkheid en systeemkwetsbaarheid worden beperkt. Het intermediarmodel vereist een hoge mate van interoperabiliteit. De behoefte aan schaalbaarheid en flexibiliteit heeft de afgelopen jaren geleid tot een groeiende voorkeur voor het intermediairmodel, waarin meerdere dienstverleners actief zijn. Bekende voorbeelden van dataspaces die dit model hanteren zijn MedMij, eOverdracht en KIK-V.
 
+### Drie hoofdcategorieen van secundair gebruik
+
+Ziekenhuizen en andere datahouders moeten steeds meer de data die zijn vastgelegd tijdens het zorgproces, beschikbaar stellen voor hergebruik. Dit zogenaamde secundair gebruik van gezondheidsgegevens is niet nieuw, maar zal naar verwachting met de komst van de European Health Data Space (EHDS) toenemen. Voor de business context is het belangrijk om onderscheid te maken tussen verschillende vormen van secundair gebruik, namelijk:
+
+- **Gegevensuitwisseling:** een data aanlevering, waarbij persoonsgegevens worden doorgestuurd aan de datagebruiker. Dit kan bijvoorbeeld een kwaliteitsregistratie zijn.
+- **Gegevensverzoek:** verschaffen van geanonimiseerde, geaggregeerde gegevens zonder dat de datagebruiker daarbij direct toegang te krijgen tot gezondheidsgegevens op persoonsniveau. Deze vorm van secundair gebruik is beschreven in [artikel 69](https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=OJ:L_202500327&qid=1764922416982#art_69) van de EHDS.
+- **Gegevensvergunning:**  op grond van [artikel 68](https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=OJ:L_202500327&qid=1764922416982#art_68) van de EHDS kan een datagebruiker, nadat zij een vergunning heeft gekregen, toegang krijgen tot de gezondheidsgegevens om daarmee onderzoek, beleidsanalyses of product ontwikkeling mee te doen. De gebruiker werkt in een beveiligde verwerkingsomgeving.
+
+Alhoewel elk van deze drie vormen van secundair gebruik afzonderlijke juridische kaders en spelregels kent, biedt PLUGIN een generieke basisinfrastructuur die al deze vormen van secundair gebruik ondersteund. Daarmee houden we het voor datahouders beheersbaar en betaalbaar.
+
+### Data-interoperabiliteit
+
+Het effectief en efficient hergebruik van gezondheidsgegevens staat of valt met het standaardiseren van de manier hoe datahouders informatie vastleggen. Binnen de blauwdrukken van dataspaces zijn inmiddels tal van generieke, domeinoverstijgende standaarden gedefinieerd voor onder andere authorisatie, authenicatie, de metadatacatalogus etc. In dit document zullen we hier niet nader op ingaan, maar verwijzen we naar bestaande referentiearchitecturen.
+
+Wel gaan we specifiek in op data-interoperabiliteit, omdat dit binnen het zorgdomein een belangrijk beperking is. In de architectuur van PLUGIN willen we een (deel)oplossing bieden voor data-interoperabiliteit op twee niveaus interoperabiliteit, namelijk:
+
+- **syntactische interoperabiliteit** nodig. Dit gaat over de **vorm** en de **structuur** van het bericht, zoals bijvoorbeeld een brief. Syntactische interoperabiliteit betekent dat de ontvanger de brief fysiek kan openen, herkent dat het een brief is, en dat zij de letters kan lezen (bijvoorbeeld het Latijnse alfabet). In de zorg zijn er verschillende soorten syntactische standaarden, waaronder openEHR, FHIR en OMOP.
+
+- **semantische interoperabiliteit** gaat over de **inhoud** en het **begrip**. Als de brief eenmaal is geopend, willen we begrijpen wat er staat. We moeten dezelfde taal spreken en dezelfde definities gebruiken. Als ik "bank" schrijf, moet de ontvanger weten of ik een zitmeubel bedoel of een geldinstelling. In de zorg maken we gebruik van landelijke codestelsels, zoals de DHD diagnose- en verrichtingenthesaurus, en international codestelsels zoals ICD10, SNOMED CT en LOINC. Het kunnen faciliteren van transformaties tussen deze codestelsels in een essentiele business 
+
+Het kunnen faciliteren van transformaties tussen syntactische standaarden èn transformaties tussen codestelsel zijn beide essentiele business requirements voor PLUGIN.
 
 ## Technische context {#_technische_context}
 
-De processing hub en het datastation zijn de twee belangrijkste deelsystemen van PLUGIN. Deze systemen moeten (op termijn) interacteren met andere systemen binnen het LDN, waaronder de Data Access Application Management System (DAAMS) en de nationale catalogus. Het datastation zal moeten integreren met verschillen bronsystemen en data-toegangsystemen bij de datahouders
-
 ![](./images/datastation-netwerk.drawio.svg)
 
-## Systeemcomponenten PLUGIN
+De processing hub en het datastation zijn de twee belangrijkste deelsystemen van PLUGIN. Deze systemen moeten (op termijn) interacteren met andere systemen binnen het LDN, waaronder de Data Access Application Management System (DAAMS) en de nationale catalogus. Het datastation zal moeten integreren met verschillen bronsystemen en data-toegangsystemen bij de datahouders.
 
-Gegeven deze business context bestaat PLUGIN als platform uit de volgende deelsystemen.
+PLUGIN bestaat als platform uit de volgende onderdelen, die in volgende hoofdstukken in meer detail worden beschreven.
 
-
-| Deelsystemen | Omschrijving |
-|-------------------------|--------------|
-| PLUGIN-Lake | Component waarmee het PLUGIN-datastation wordt gevuld |
-| PLUGIN-Hub | Component waarmee gegevensaanleveringen kunnen worden uitgevoerd |
+| Onderdeel | Omschrijving                  |
+|-----------|-------------------------------|
+| PLUGIN-Lake      | Component waarmee het PLUGIN-datastation wordt gevuld |
+| PLUGIN-Hub       | Component waarmee gegevensaanleveringen kunnen worden uitgevoerd |
 | PLUGIN-Analytics | Component waarmee federatieve analyses kunnen worden uitgevoerd |
-| PLUGIN-ML | Component waarmee federatief machine learning modellen ontwikkeld kunnen worden |
-| PLUGIN-Rosetta | Component waarmee mappings en transformaties op een uniforme manier beheerd en hergebruikt kunnen worden  |
-| PLUGIN-NUTS | Component voor decentrale identificatie en ... |
-| PLUGIN-... | ... |
+| PLUGIN-ML        | Component waarmee federatief machine learning modellen ontwikkeld kunnen worden |
+| PLUGIN-Rosetta   | Component waarmee mappings en transformaties op een uniforme manier beheerd en hergebruikt kunnen worden  |
+| PLUGIN-NUTS      | Component voor decentrale authorisatie, identificatie en _verifiable credentials_ |
 
